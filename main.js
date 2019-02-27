@@ -1,16 +1,27 @@
 var mongoose=require("mongoose");
 var schema=require("./schema");
 
-mongoose.connect("mongodb://localhost:27017/test");
+mongoose.connect("mongodb://localhost:27017/reviews");
 
-var User=mongoose.model("User2",schema,"users2");
+var Post=mongoose.model("Post",schema,"post");
 
-var user=new User({
-    name:"John Smith",
-    email:"john@smith.io"
+var post=new Post({
+    title:"El día despues de mañana",
+    author:"John Smith",
+    body:"En esta increible hazaña encontraremos a todos nuestros ...",
+    comments:[
+        {
+            body:"Me parecio excelente...",
+            date:Date.now()
+        }
+    ],
+    meta:{
+        votes:10,
+        favs:2
+    }
 });
 
-user.save(err=>{
+post.save(err=>{
     if(err){
         console.log(err);
         process.exit(1);

@@ -1,19 +1,24 @@
 var mongoose=require("mongoose");
 
 module.exports=new mongoose.Schema({
-    name:{
+    title:{
         type:String,
         required:true
     },
-    email:{
+    author:{
         type:String,
-        required:true,
-        match: /.+@.+\..+/,
-        lowercase:true
+        required:true
     },
-    loggedCount:{
-        type:Number,
-        default:0
+    body:{
+        type:String,
+        required:true
+    },
+    comments:[{body:String,date:Date}],
+    date:{type:Date,default:Date.now},
+    hidden:{type:Boolean,default:false},
+    meta:{
+        votes:Number,
+        favs:Number
     }
 });
 
